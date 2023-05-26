@@ -16,7 +16,24 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+      expect(appController.getHello()).toEqual({
+        output: 'Yes',
+        statuscode: 0,
+      });
+    });
+  });
+
+  describe('/execute', () => {
+    it("should return a JSON with output 'No'", () => {
+      expect(
+        appController.execCode({
+          script: 'console.log("Hello")',
+          language: 'Javascript',
+        }),
+      ).toEqual({
+        output: 'No',
+        statuscode: 0,
+      });
     });
   });
 });
